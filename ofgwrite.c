@@ -1385,9 +1385,9 @@ int umount_rootfs(int steps)
 	// kill all remaining open processes which prevent umounting rootfs
 	ret = exec_fuser_kill();
 	if (!ret)
-		my_printf("fuser successful\n");
+		set_error_text1("fuser successful");
 	else
-		my_printf("fuser not successful\n");
+		set_error_text1("fuser not successful");
 	sleep(3);
 
 	ret = umount("/oldroot/newroot");
