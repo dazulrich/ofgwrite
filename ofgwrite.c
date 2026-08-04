@@ -1386,6 +1386,8 @@ int umount_rootfs(int steps)
 	ret = exec_fuser_kill();
 	if (!ret)
 		my_printf("fuser successful\n");
+	else
+		my_printf("fuser not successful\n");
 	sleep(3);
 
 	ret = umount("/oldroot/newroot");
