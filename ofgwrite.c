@@ -1390,23 +1390,30 @@ int umount_rootfs(int steps)
 
 	ret = umount("/oldroot/newroot");
 	if (!ret)
+	{
 		my_printf("umount successful\n");
 		set_error_text1("newroot umount successful");
 		sleep(1);
+	}	
 	else
+	{
 		my_printf("umount not successful\n");
 		set_error_text1("newroot umount not successful");
 		sleep(1);
+	}
 	ret = umount("/oldroot/");
 	if (!ret)
+	{
 		my_printf("umount successful\n");
 		set_error_text1("oldroot umount successful");
 		sleep(1);
+	}
 	else
 		my_printf("umount not successful\n");
 		set_error_text1("oldroot umount not successful");
 		sleep(1);
-	
+	}
+
 	// mount oldroot to other mountpoint, because otherwise all data in not moved filesystems under /oldroot will be deleted
 	if (rootfs_flash_mode == TARBZ2 || rootfs_flash_mode == TARBZ2_MTD || rootfs_flash_mode == UBI_LOOP_SUBDIR || rootfs_flash_mode == TARXZ_UBI)
 	{
