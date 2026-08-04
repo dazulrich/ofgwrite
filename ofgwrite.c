@@ -1443,6 +1443,7 @@ int umount_rootfs(int steps)
 		{
 			my_printf("Error remounting root ro! Abort flashing.\n");
 			set_error_text1("Error remounting root ro! Abort flashing.");
+			char info[128];
 			sprintf(info, "Rebooting.... ERRNO: %s ", strerror(errno));
 			set_info_text(info);
 			sleep(30);
