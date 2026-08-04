@@ -1389,28 +1389,17 @@ int umount_rootfs(int steps)
 	sleep(3);
 
 	ret = umount("/oldroot/newroot");
+	ret = umount("/oldroot/");
 	if (!ret)
 	{
 		my_printf("umount successful\n");
-		set_error_text1("newroot umount successful");
+		set_error_text1("umount successful");
 		sleep(1);
 	}	
 	else
 	{
 		my_printf("umount not successful\n");
-		set_error_text1("newroot umount not successful");
-		sleep(1);
-	}
-	ret = umount("/oldroot/");
-	if (!ret)
-	{
-		my_printf("umount successful\n");
-		set_error_text1("oldroot umount successful");
-		sleep(1);
-	}
-	else
-		my_printf("umount not successful\n");
-		set_error_text1("oldroot umount not successful");
+		set_error_text1("umount not successful");
 		sleep(1);
 	}
 
