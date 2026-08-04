@@ -1780,7 +1780,7 @@ int main(int argc, char *argv[])
 	read_mtd_file();
 	find_kernel_rootfs_device();
 	
-	my_printf("Rootfs flash mode: %s\n", rootfs_flash_mode);
+	my_printf("Rootfs flash mode: %d\n", (int)rootfs_flash_mode);
 
 	if (flash_kernel && (!found_kernel_device || kernel_filename[0] == '\0'))
 	{
