@@ -1263,6 +1263,7 @@ int umount_rootfs(int steps)
 		ret += system("cp -arf /lib64/libresolv*   /newroot/lib64");
 		ret += system("cp -arf /lib64/librt*       /newroot/lib64");
 		ret += system("cp -arf /usr/lib64/libtirp* /newroot/usr/lib64");
+		ret += system("cp -arf /usr/lib64/libauto* /newroot/usr/lib64");
 		ret += system("cp -arf /usr/lib64/autofs/* /newroot/usr/lib64/autofs");
 		ret += system("cp -arf /etc/nsswitch*    /newroot/etc");
 		ret += system("cp -arf /etc/resolv*      /newroot/etc");
@@ -1277,6 +1278,7 @@ int umount_rootfs(int steps)
 		ret += system("cp -arf /lib/libresolv*   /newroot/lib");
 		ret += system("cp -arf /lib/librt*       /newroot/lib");
 		ret += system("cp -arf /usr/lib/libtirp* /newroot/usr/lib");
+		ret += system("cp -arf /usr/lib/libauto* /newroot/usr/lib");
 		ret += system("cp -arf /usr/lib/autofs/* /newroot/usr/lib/autofs");
 		ret += system("cp -arf /etc/nsswitch*    /newroot/etc");
 		ret += system("cp -arf /etc/resolv*      /newroot/etc");
