@@ -1276,6 +1276,7 @@ int umount_rootfs(int steps)
 		ret += system("cp -arf /lib/libnsl*      /newroot/lib");
 		ret += system("cp -arf /lib/libresolv*   /newroot/lib");
 		ret += system("cp -arf /lib/librt*       /newroot/lib");
+		ret += system("cp -arf /lib/libautofs*   /newroot/lib");
 		ret += system("cp -arf /usr/lib/libtirp* /newroot/usr/lib");
 		ret += system("cp -arf /usr/lib/autofs/* /newroot/usr/lib/autofs");
 		ret += system("cp -arf /etc/nsswitch*    /newroot/etc");
