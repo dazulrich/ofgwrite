@@ -1787,7 +1787,7 @@ int main(int argc, char *argv[])
 	
 	my_printf("Kernel flash mode: %d\n", (int)kernel_flash_mode);
 	my_printf("Rootfs flash mode: %d\n", (int)rootfs_flash_mode);
-	my_printf("Image type: %d\n", (int)image_type)
+	my_printf("Image type: %d\n", (int)image_type);
 
 	if (flash_kernel && (!found_kernel_device || kernel_filename[0] == '\0'))
 	{
