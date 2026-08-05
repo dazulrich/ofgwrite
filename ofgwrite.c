@@ -1376,14 +1376,20 @@ int umount_rootfs(int steps)
 	{
 		my_printf("Error creating symlinks\n");
 	}
-	
+	else
+	{
+		my_printf("Symlinks created\n");
+	}
 	// try to restart autofs
 	ret =  system("/bin/automount");
 	if (ret != 0)
 	{
 		my_printf("Error starting autofs\n");
 	}
-
+	else
+	{
+		my_printf("autofs started\n");
+	}
 	// restart init process
 	ret = system("exec init u");
 	sleep(3);
