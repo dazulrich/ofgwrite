@@ -1377,18 +1377,19 @@ int umount_rootfs(int steps)
 		strcpy(oldroot_path, "/oldroot");
 		strcat(oldroot_path, mountlist->dir);
 		ret = umount2(oldroot_path, MNT_DETACH);
+		char info_text[128];
 		if (!ret)
 		{
 			my_printf("umounting %s successful\n", mountlist->dir);
-			sprintf(info, "Umounting %s successful", mountlist->dir);
-			set_error_text1(info);
+			sprintf(info_text, "Umounting %s successful", mountlist->dir);
+			set_error_text1(info_text);
 			sleep(1);
 		}	
 		else
 		{
 			mmy_printf("umounting %s not successful\n", mountlist->dir);
-			sprintf(info, "Umounting %s not successful", mountlist->dir);
-			set_error_text1(info);
+			sprintf(info_text, "Umounting %s not successful", mountlist->dir);
+			set_error_text1(info_text);
 			sleep(1);
 		}		
 		free(mountlist->dir);
