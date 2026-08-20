@@ -34,6 +34,7 @@ pkill -9 -f ciplus_helper > /dev/null 2>&1
 pkill -9 -f ciplushelper > /dev/null 2>&1
 pkill -f vmc.sh > /dev/null 2>&1
 pkill -f DBServer.py > /dev/null 2>&1
+/etc/init.d/autofs stop > /dev/null 2>&1
 
 sleep 10
 mount -o ro,remount /
