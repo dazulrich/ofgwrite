@@ -1482,8 +1482,8 @@ int umount_rootfs(int steps)
 			my_printf("Error remounting root ro! Abort flashing.\n");
 			set_error_text1("Error remounting root ro! Abort flashing.");
 			char info[128];
-			sprintf(info, "Rebooting in 30 sec. ERRNO: %s ", strerror(errno));
-			set_info_text2(info);
+			sprintf(info, "Rebooting.. ERRNO: %s ", strerror(errno));
+			set_info_text(info);
 			sleep(30);
 			reboot(LINUX_REBOOT_CMD_RESTART);
 			return 0;
