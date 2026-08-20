@@ -1263,6 +1263,7 @@ int umount_rootfs(int steps)
 		ret += system("cp -arf /lib64/libresolv*   /newroot/lib64");
 		ret += system("cp -arf /lib64/librt*       /newroot/lib64");
 		ret += system("cp -arf /usr/lib64/libtirp* /newroot/usr/lib64");
+		// ret += system("cp -arf /usr/lib64/libauto* /newroot/usr/lib64");
 		ret += system("cp -arf /usr/lib64/autofs/* /newroot/usr/lib64/autofs");
 		ret += system("cp -arf /etc/nsswitch*    /newroot/etc");
 		ret += system("cp -arf /etc/resolv*      /newroot/etc");
@@ -1276,8 +1277,8 @@ int umount_rootfs(int steps)
 		ret += system("cp -arf /lib/libnsl*      /newroot/lib");
 		ret += system("cp -arf /lib/libresolv*   /newroot/lib");
 		ret += system("cp -arf /lib/librt*       /newroot/lib");
-		ret += system("cp -arf /usr/lib/libauto* /newroot/usr/lib");
 		ret += system("cp -arf /usr/lib/libtirp* /newroot/usr/lib");
+		// ret += system("cp -arf /usr/lib/libauto* /newroot/usr/lib");
 		ret += system("cp -arf /usr/lib/autofs/* /newroot/usr/lib/autofs");
 		ret += system("cp -arf /etc/nsswitch*    /newroot/etc");
 		ret += system("cp -arf /etc/resolv*      /newroot/etc");
@@ -1353,17 +1354,43 @@ int umount_rootfs(int steps)
 		strcat(oldroot_path, rootfs_mount_point);
 		my_printf("Moving %s to %s\n", oldroot_path, rootfs_mount_point);
 		// mount move: ignore errors as e.g. network shares cannot be moved
-		mount(oldroot_path, rootfs_mount_point, NULL, MS_MOVE, NULL);
+		ret = mount(oldroot_path, rootfs_mount_point, NULL, MS_MOVE, NULL);
+		if (!ret)
+		{
+			my_printf("Move mnt of image files successful\n");
+			set_error_text1("Move mnt of image files successful");
+			sleep(1);
+		}	
+		else
+		{
+			my_printf("Move mnt of image files not successful\n");
+			set_error_text1("Move mnt of image files not successful");
+			sleep(1);
+		}
 	}
 
 	// umount all unneeded filesystems
 	while (mountlist != NULL)
 	{
 		char oldroot_path[1000];
-		my_printf("umounting: %s\n", mountlist->dir);
+		// my_printf("umounting: %s\n", mountlist->dir);
 		strcpy(oldroot_path, "/oldroot");
 		strcat(oldroot_path, mountlist->dir);
-		umount2(oldroot_path, MNT_DETACH);
+		ret = umount2(oldroot_path, MNT_DETACH);
+		if (!ret)
+		{
+			my_printf("umounting %s successful\n", mountlist->dir);
+			sprintf(info, "Umounting %s successful", mountlist->dir);
+			set_error_text1(info);
+			sleep(1);
+		}	
+		else
+		{
+			mmy_printf("umounting %s not successful\n", mountlist->dir);
+			sprintf(info, "Umounting %s not successful", mountlist->dir);
+			set_error_text1(info);
+			sleep(1);
+		}		
 		free(mountlist->dir);
 		mountlist = mountlist->next;
 	}
@@ -1377,6 +1404,7 @@ int umount_rootfs(int steps)
 	if (ret != 0)
 	{
 		my_printf("Error starting autofs\n");
+		set_error_text1("Error starting autofs");
 	}
 
 	// restart init process
