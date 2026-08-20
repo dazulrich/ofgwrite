@@ -1355,7 +1355,7 @@ int umount_rootfs(int steps)
 		mount(oldroot_path, rootfs_mount_point, NULL, MS_MOVE, NULL);
 	}
 	
-	// sleep(1);
+	sleep(1);
 	// umount all unneeded filesystems
 	while (mountlist != NULL)
 	{
@@ -1366,7 +1366,7 @@ int umount_rootfs(int steps)
 		umount2(oldroot_path, MNT_DETACH);
 		free(mountlist->dir);
 		mountlist = mountlist->next;
-		// sleep(1);
+		sleep(1);
 	}
 
 	// create link for mount/umount for autofs
