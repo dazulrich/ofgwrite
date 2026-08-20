@@ -1387,7 +1387,7 @@ int umount_rootfs(int steps)
 		}	
 		else
 		{
-			mmy_printf("umounting %s not successful\n", mountlist->dir);
+			my_printf("umounting %s not successful\n", mountlist->dir);
 			sprintf(info_text, "Umounting %s not successful", mountlist->dir);
 			set_error_text1(info_text);
 			sleep(1);
