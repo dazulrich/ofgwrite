@@ -1355,7 +1355,7 @@ int umount_rootfs(int steps)
 		mount(oldroot_path, rootfs_mount_point, NULL, MS_MOVE, NULL);
 	}
 	
-	sleep(1);
+	// sleep(1);
 	// umount all unneeded filesystems
 	while (mountlist != NULL)
 	{
@@ -1364,9 +1364,9 @@ int umount_rootfs(int steps)
 		strcpy(oldroot_path, "/oldroot");
 		strcat(oldroot_path, mountlist->dir);
 		umount2(oldroot_path, MNT_DETACH);
+		sleep(1);
 		free(mountlist->dir);
 		mountlist = mountlist->next;
-		//sleep(1);
 	}
 
 	// create link for mount/umount for autofs
@@ -1391,13 +1391,13 @@ int umount_rootfs(int steps)
 	sleep(3);
 
 	ret = umount("/oldroot/newroot");
-	//sleep(1);
+	// sleep(1);
 	ret = umount("/oldroot/");
 	if (!ret)
 		my_printf("umount successful\n");
 	else
 		my_printf("umount not successful\n");
-	//sleep(1);
+	// sleep(1);
 	// mount oldroot to other mountpoint, because otherwise all data in not moved filesystems under /oldroot will be deleted
 	if (rootfs_flash_mode == TARBZ2 || rootfs_flash_mode == TARBZ2_MTD || rootfs_flash_mode == UBI_LOOP_SUBDIR || rootfs_flash_mode == TARXZ_UBI)
 	{
